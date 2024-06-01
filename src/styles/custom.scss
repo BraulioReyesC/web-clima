@@ -1,0 +1,67 @@
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+
+$primary: #ff5733;
+$secondary: #33c3ff;
+$input-border-color: white;
+$gray-200: white;
+$light: #F6F6F8; 
+/*CUSTOM BACKGROUND*/
+.custom-background {
+    height: 70px;
+    background-image: url('../assets/img_1.png');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(15,86,0,0.9);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+.custom-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Cambia a tu color y opacidad deseada */
+    z-index: 1;
+}
+.custom-background > * {
+    position: relative;
+    z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
+}
+/*BOTONES CIRCULARES DE TEMPERATURA*/
+.circle{
+    width:35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+}
+.circle.active{
+    color:white;
+    background-color: black;
+}
+/*NAV-ITEM*/
+.nav-link{
+    color:lightgrey !important;
+    padding:0px !important;
+    margin:20px;
+    font-size:25px !important;
+}
+.nav-link.active{
+    color:grey !important;
+    border-bottom: 3px solid #bfbdbd !important;
+    padding:0px !important;
+    margin:20px;
+}
+/*FONT SIZE TAMAÑO 50*/
+.fs-50-custom{
+    font-size: 50px;
+}
+@import '../../node_modules/bootstrap/scss/bootstrap.scss'
