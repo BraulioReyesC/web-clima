@@ -6,6 +6,10 @@ $secondary: #33c3ff;
 $input-border-color: white;
 $gray-200: white;
 $light: #F6F6F8; 
+
+body{
+    scroll-behavior: smooth;
+}
 /*CUSTOM BACKGROUND*/
 .custom-background {
     height: 70px;
@@ -42,8 +46,14 @@ $light: #F6F6F8;
     align-items: center;
     justify-content: center;
     padding-top: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 .circle.active{
+    color:white;
+    background-color: black;
+}
+.circle:hover{
     color:white;
     background-color: black;
 }
