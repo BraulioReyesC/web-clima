@@ -10,6 +10,6 @@ module.exports = defineConfig({
     }
   },
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/nombredelrepositorio/'  // Reemplaza 'nombredelrepositorio' con el nombre de tu repositorio
+    ? '/web-clima/'  // Reemplaza 'nombredelrepositorio' con el nombre de tu repositorio
     : '/'
 })
