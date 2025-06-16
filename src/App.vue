@@ -13,22 +13,15 @@
         <div class="d-flex align-items-start mt-2 mb-2">
           <span style="font-size: 80px;">{{weather.main.temp}}<sup>o</sup></span><span style="font-size: 60px;" class="ms-2 mt-2" v-if="units == 'metric'">C</span><span v-else style="font-size: 60px;" class="ms-2 mt-2">F</span>
         </div>
-        <span class="fw-bold">Monday,</span><span class="text-secondary">{{localTime}}</span>
+        <span class="fw-bold">{{dayName}},</span><span class="text-secondary">{{localTime}}</span>
         <hr class="mt-4 mb-4">
         <p><span class="material-symbols-outlined align-middle me-2">location_on</span>{{coordinates.location}}</p>
         <p><span class="material-symbols-outlined align-middle me-2">cloud</span>{{descriptionWeather}}</p>
-        <p><span class="material-symbols-outlined align-middle me-2">rainy</span>Rain - 60%</p>
-        <div class="mt-5 justify-content-center w-100 text-white rounded-4 d-flex align-items-center custom-background" style="height: 90px;">
-          <span>Raiput, Chattisgarthsrc</span>
-        </div>
       </div>
       <div class="col-md-8 bg-light p-5 pt-5">
-        <ul class="nav d-flex align-items-center mb-5">
+        <ul class="nav d-flex align-items-center mb-4">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Today</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Week</a>
+            <a class="nav-link active" href="#">Pronóstico Semanal</a>
           </li>
           <div :class="{'circle me-0 ms-auto me-3 small':true, 'active':(units == 'metric')}" @click="units = 'metric';fetchWeather();fetchForecast();">
             <sup>o</sup>C
@@ -42,8 +35,8 @@
         </ul>
         <div class="row m-1">
           <div class="col p-0 pt-1 pe-1 h-100" v-for="item in agrupacionSemana" :key="item.id">
-            <div class="bg-white rounded-4 text-center p-1 pt-2 h-100">
-              <span>{{item.name}}</span>
+            <div class="bg-white rounded-4 text-center p-1 pt-2 h-100 cursor-pointer shadow-sm">
+              <span class="fw-bold">{{item.name}}</span>
               <img src="../src/assets/weather-sunny.png" alt="" style="height: 80px">
               <p class="small mb-0">Máx {{item.max.main.temp_max}}<sup>o</sup>
               </p>
@@ -53,11 +46,10 @@
           </div>
          
         </div>
-        <h5 class="text-secondary mt-5 mb-4">Today's Highlight</h5>
-        <div class="row bg-white rounded-4 ps-5 pe-5 pt-5 pb-5 m-1">
-          <div class="w-100 d-flex align-items-center mb-4">
-            <span class="text-secondary fs-5">Air Condition</span>
-            <div class="btn btn-dark rounded-5 me-0 ms-auto">See More</div>
+        <h5 class="text-secondary mt-5 mb-4">Medidas de Hoy</h5>
+        <div class="row bg-white rounded-4 ps-5 pe-5 pt-4 pb-5 m-1 shadow-sm">
+          <div class="w-100 d-flex align-items-center mb-4" >
+            <div class="btn btn-dark rounded-5 me-0 ms-auto" v-show="false">See More</div>
           </div>
           <div class="row opacity-75">
             <div class="col-md-4 d-flex align-items-center">
@@ -84,76 +76,57 @@
           </div>
           <div class="row opacity-75 mt-4">
             <div class="col-md-4 d-flex align-items-center">
-              <h1 class="material-icons text-secondary fs-50-custom me-2">water_drop</h1>
-              <p class="text-secondary">Chance of rain
-                <br>
-                0 %
-              </p>
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
-              <h1 class="material-icons text-secondary fs-50-custom me-2">star</h1>
-              <p class="text-secondary">UV Index 
-                <br>
-                3
-              </p>
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
               <h1 class="material-icons text-secondary fs-50-custom me-2">wb_twilight</h1>
               <p class="text-secondary">Atardecer
                 <br>
                 {{hourSunset}} (hora local)
               </p>
             </div>
+            <div class="col-md-4 d-flex align-items-center">
+              <h1 class="material-icons text-secondary fs-50-custom me-2">thermostat</h1>
+              <p class="text-secondary">Rango Término
+                <br>
+                Min. {{weather.main.temp_max}} <sup>o</sup>
+                <br>
+                Max. {{weather.main.temp_min}} <sup>o</sup>
+              </p>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+              <h1 class="material-icons text-secondary fs-50-custom me-2">water_drop</h1>
+              <p class="text-secondary">Humedad Relativa
+                <br>
+                {{weather.main.humidity}} %
+              </p>
+            </div>
           </div>
-        </div>
-        <h5 class="text-secondary mt-5 mb-4">Time-wise update</h5>
-        <div class="row bg-white rounded-4 p-4 m-1">
-          <div class="w-100 d-flex align-items-center mb-4">
-            <span class="text-secondary fs-5">Time Wise Updation</span>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4 fs-4">
-                <span class="d-block mb-3">13:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
+          <div class="row opacity-75 mt-4">
+            <div class="col-md-4 d-flex align-items-center">
+              <h1 class="material-icons text-secondary fs-50-custom me-2">waves</h1>
+              <p class="text-secondary">Presión Atmosférica
+                <br>
+                {{weather.main.pressure}} hPa
+              </p>
             </div>
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4  fs-4">
-                <span class="d-block mb-3">14:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
+            <div class="col-md-4 d-flex align-items-center">
+              <h1 class="material-icons text-secondary fs-50-custom me-2">waves</h1>
+              <p class="text-secondary">Presión del suelo
+                <br>
+                {{weather.main.grnd_level}} hPa
+              </p>
             </div>
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4  fs-4">
-                <span class="d-block mb-3">15:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
-            </div>
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4  fs-4 bg-dark text-white fw-bold">
-                <span class="d-block mb-3">16:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
-            </div>
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4  fs-4">
-                <span class="d-block mb-3">17:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
-            </div>
-            <div class="col">
-              <div class="text-center border rounded-4 pt-4 pb-4  fs-4">
-                <span class="d-block mb-3">17:00</span>
-                <span class="d-block">30 <sup>o</sup>C</span>
-              </div>
+            <div class="col-md-4 d-flex align-items-center">
+              <h1 class="material-icons text-secondary fs-50-custom me-2">waves</h1>
+              <p class="text-secondary">Presión al nivel del mar
+                <br>
+                {{weather.main.sea_level}} hPa
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  {{coordinates}}
+ 
 </template>
 
 <script>
@@ -218,7 +191,6 @@ export default {
   }
   ,mounted(){
     this.fetchWeather()
-    this.fetchForecast()
   }
   ,methods:{
     async fetchLocation(){
@@ -246,12 +218,12 @@ export default {
     async fetchWeather(){
       var response = await fetch(`/api/weather?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
       this.weather = await response.json()
-      console.log(this.weather)
+      this.fetchForecast()
     },
     async fetchForecast(){
       var response = await fetch(`/api/forecast?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
       this.forecast = await response.json()
-      console.log(this.forecast)
+      console.log({...this.forecast})
       this.agruparDias()
     },
     agruparDias(){
@@ -281,7 +253,6 @@ export default {
         item.max = item.list.reduce((maximo, valor)=> valor.main.temp_max > maximo.main.temp_max ? valor : maximo, item.list[0])
         item.min = item.list.reduce((minimo, valor)=> valor.main.temp_max < minimo.main.temp_max ? valor : minimo, item.list[0])
       })
-      console.log(this.agrupacionSemana)
     },
     obtenerDiaSemana(fecha_texto){
       var fecha = new Date(fecha_texto);
@@ -325,6 +296,14 @@ export default {
     localTime(){
       const fecha = new Date(this.weather.dt * 1000);
       return fecha.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
+    },
+    dayName(){
+
+      const date = new Date( this.weather.dt * 1000); // Multiplicamos por 1000 porque JS usa milisegundos
+      const options = { weekday: 'long', timeZone: 'America/Santiago' }; // Chile
+      const dia = date.toLocaleDateString('es-CL', options);
+
+      return (dia); 
     }
   }
 }
@@ -347,6 +326,9 @@ body{
   'wght' 200,
   'GRAD' -25,
   'opsz' 48
+}
+.cursor-pointer{
+  cursor: pointer;
 }
 
 </style>
