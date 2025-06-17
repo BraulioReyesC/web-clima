@@ -196,7 +196,7 @@ export default {
     async fetchLocation(){
       if(this.searchLocation.length != 0){
         var searchLocationTimeExecution = new Date()
-        var response = await fetch(`/api/location?city_name=${this.searchLocation}`)
+        var response = await fetch(`https://weather-api.braulioreyes.com/api/location?city_name=${this.searchLocation}`)
         if(searchLocationTimeExecution > this.searchLocationTimeExecution){
           this.searchLocationTimeExecution = searchLocationTimeExecution
           this.listLocations =[]
@@ -216,12 +216,12 @@ export default {
       this.searchLocation=''
     },
     async fetchWeather(){
-      var response = await fetch(`/api/weather?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
+      var response = await fetch(`https://weather-api.braulioreyes.com/api/weather?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
       this.weather = await response.json()
       this.fetchForecast()
     },
     async fetchForecast(){
-      var response = await fetch(`/api/forecast?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
+      var response = await fetch(`https://weather-api.braulioreyes.com/api/forecast?lat=${this.coordinates.lat}&lon=${this.coordinates.lon}&units=${this.units}`)
       this.forecast = await response.json()
       console.log({...this.forecast})
       this.agruparDias()

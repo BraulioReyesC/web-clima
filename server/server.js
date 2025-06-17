@@ -8,7 +8,7 @@ app.get('/api/location', async (req, res) => {
     const city_name =req.query.city_name;
     const API_KEY= process.env.API_KEY
     try {   
-        const response = await axios.get( `http://api.openweathermap.org/geo/1.0/direct?q=${city_name}&limit=5&appid=${API_KEY}`, {});
+        const response = await axios.get( `https://api.openweathermap.org/geo/1.0/direct?q=${city_name}&limit=5&appid=${API_KEY}`, {});
         res.json(response.data);
     } catch (error) {
         console.error('Error haciendo el llamado a la API /api/location:', error);
