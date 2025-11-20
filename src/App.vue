@@ -143,7 +143,7 @@ export default {
       weather:{
           "coord": {
               "lon": 0,
-              "lat": 0
+              "lat": 2
           },
           "weather": [
               {
